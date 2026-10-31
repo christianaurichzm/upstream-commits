@@ -1,0 +1,40 @@
+:root{color-scheme:dark;--bg:#0d1117;--fg:#e6edf3;--muted:#9da7b3;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--fg);font:18px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
+main{flex:1;width:100%;max-width:46rem;margin:0 auto;padding:4rem 1.25rem;display:flex;flex-direction:column;justify-content:center}
+footer{width:100%;max-width:46rem;margin:0 auto;padding:0 1.25rem 2rem;color:var(--muted);font-size:.75rem}
+h1{margin:.5rem 0 .25rem;font-size:clamp(2.5rem,9vw,4rem);line-height:1.1;letter-spacing:-.02em}
+h2{margin:0;font-size:1.35rem}
+main>h2{margin-top:2.5rem}
+p{margin:.75rem 0}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+code{color:var(--muted);font:.95rem/1.5 var(--mono);overflow-wrap:anywhere}
+ul{list-style:none;margin:2rem 0 0;padding:0;display:grid;gap:2rem}
+ul li{position:relative;padding-left:1.25rem;border-left:3px solid var(--accent)}
+ul h2 a{color:var(--accent);text-decoration:none}
+ul li:hover h2 a{text-decoration:underline}
+/* Stretches the title link over the whole card. */
+ul h2 a::after{content:"";position:absolute;inset:0}
+ol{list-style:none;margin:1rem 0;padding:0}
+ol li{position:relative;display:grid;grid-template-columns:6.5rem 1fr;gap:.75rem;padding:.6rem 2.75rem .6rem 0;border-top:1px solid #30363d}
+time{color:var(--muted);font:.85rem/1.9 var(--mono)}
+ol li>div{min-width:0;overflow-wrap:anywhere}
+/* The summary covers the whole row but sits under the description, so its text stays selectable.
+   The script in project.html closes the row on a plain click on that text. */
+summary{position:absolute;inset:0;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";position:absolute;top:.95rem;right:1.05rem;width:.6rem;height:.6rem;border:solid var(--muted);border-width:0 2px 2px 0;transform:rotate(45deg)}
+details[open] summary::after{top:1.2rem;transform:rotate(-135deg)}
+ol a,.message{position:relative;z-index:1}
+/* Covers the gap between the lines of a wrapped title, which would otherwise open the row. */
+ol a{padding:.3rem 0}
+.message{margin:.5rem -2.75rem .25rem 0;white-space:pre-wrap;font:.82rem/1.55 var(--mono)}
+details:has(.message:empty){display:none}
+@media(max-width:30rem){ol li{grid-template-columns:1fr;gap:0}}
+.eyebrow{margin:0;color:var(--accent);font:600 .85rem/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.button{display:inline-block;margin-top:.5rem;padding:.7rem 1.25rem;border-radius:6px;background:var(--accent);color:var(--bg);font-weight:600;text-decoration:none}
+.note{color:var(--muted);font-size:.9rem}
+.back{margin:0 0 1.5rem}
+.back a{display:inline-block;padding:.5rem 0;color:var(--muted);font-size:.9rem;text-decoration:none}
+.back a:hover{color:var(--fg)}

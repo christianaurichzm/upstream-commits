@@ -1,0 +1,39 @@
+name: Publish
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+  id-token: write
+  pages: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - run: python3 build.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs
+      - id: deploy
+        uses: actions/deploy-pages@v5
+      # GitHub disables scheduled workflows after 60 days without repository activity.
+      - run: gh api -X PUT "repos/$GITHUB_REPOSITORY/actions/workflows/publish.yml/enable"
+        env:
+          GH_TOKEN: ${{ github.token }}

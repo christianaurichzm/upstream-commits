@@ -1,0 +1,16 @@
+<p class="back"><a href="../"><span aria-hidden="true">←</span> All projects</a></p>
+<p class="eyebrow">Upstream commits</p>
+<h1>$name</h1>
+<p><code>$repo</code></p>
+$about
+<p><a class="button" id="commits" href="$commits">View on GitHub</a></p>
+<h2>$count</h2>
+<ol>
+$items
+</ol>
+<script>
+document.querySelector("ol").addEventListener("click", ({ target }) => {
+  if (target.closest(".message") && getSelection().isCollapsed) target.closest("details").open = false;
+});
+</script>
+<p class="note">Updated daily, last on $updated. By <a href="https://github.com/$user">$author</a> · <a href="../">All projects</a></p>

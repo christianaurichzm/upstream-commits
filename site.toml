@@ -1,0 +1,50 @@
+# Settings and texts of the site. Any change pushed to main is published in a few minutes.
+# The GitHub user, the site address and the name shown on the pages come from this repository
+# and its owner's profile. Set user, url or author here to override them.
+accent = "#58a6ff"
+home_description = "Commits merged upstream into the Linux kernel, Node.js, V8, PyTorch, CPython and other open source projects, with the full list for each project updated daily."
+notice = "Personal site, not affiliated with these projects. Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. Node.js® is a trademark of the OpenJS Foundation. Other names belong to their respective owners."
+# Link preview text of the pages without a description of their own. $repo becomes the repository, such as apache/kafka.
+other_description = "Upstream commits merged into $repo. Each one is listed with its full description, and the list updates daily from GitHub."
+# Preview image for link previews: a PNG or JPEG in this repository, ideally 1200x627.
+# A project can have its own with image = "..." in its section.
+# image = "preview.png"
+# Repositories that never get a page, even with a fork and commits of yours, such as "owner/name".
+hide = ["satansdeer/minecraft-react"]
+
+# Projects shown first, in this order, with their own text. Only repo is required; slug, name,
+# accent, description, image and commits, the link of the "View on GitHub" button where $user
+# becomes your GitHub user, are optional. Every other repository one of your public forks was
+# made from gets a page with other_description once it has a commit of yours.
+
+[[project]]
+repo = "torvalds/linux"
+slug = "linux"
+name = "Linux® Kernel"
+accent = "#f5b82e"
+description = "NULL pointer dereference fixes in the NVMe TCP and RDMA host drivers, and request PDU sizing with header digest."
+
+[[project]]
+repo = "nodejs/node"
+slug = "nodejs"
+name = "Node.js®"
+accent = "#5fb84e"
+description = "Fixes for crashes, overflows and missing input validation in fs, vfs, QUIC and FFI, 32-bit Blob size truncation, and test suite deflaking."
+
+[[project]]
+repo = "v8/v8"
+name = "V8"
+accent = "#4d8df5"
+description = "Inspector fix for a crash in embedders such as Node.js when Debugger.paused is delivered on breaks from API interrupts."
+
+[[project]]
+repo = "pytorch/pytorch"
+name = "PyTorch"
+accent = "#ee4c2c"
+description = "torch.compile fixes in Inductor, covering addmm and baddbmm decompositions and C++ buffer promotion, and Dynamo tracing of math functions and super()."
+
+[[project]]
+repo = "python/cpython"
+name = "CPython"
+accent = "#38bdd8"
+description = "Free-threaded crash fixes in dict(), bytes.join() and codecs.encode(), MemoryError crash fixes, and _Py_ThreadId() on Windows ARM64 with MinGW."
