@@ -106,10 +106,10 @@ def fetch_commits(repo):
 
 
 def fetch_profile():
-    """Returns the user's display name and the repositories their public forks were made from."""
+    """Returns the user's display name, LinkedIn URL and the repositories their public forks were made from."""
     # A local token also sees private forks, whose names must not reach the site.
     # ponytail: first 100 forks only, paginate with pageInfo past that.
-    query = "query($login:String!){user(login:$login){name repositories(first:100,isFork:true,privacy:PUBLIC){nodes{parent{nameWithOwner}}}}}"
+    query = "query($login:String!){user(login:$login){name socialAccounts(first:10){nodes{provider url}} repositories(first:100,isFork:true,privacy:PUBLIC){nodes{parent{nameWithOwner}}}}}"
     request = urllib.request.Request(
         "https://api.github.com/graphql",
         data=json.dumps({"query": query, "variables": {"login": USER}}).encode(),
@@ -117,7 +117,8 @@ def fetch_profile():
     )
     with urllib.request.urlopen(request, timeout=30) as response:
         user = json.load(response)["data"]["user"]
-    return user["name"], [n["parent"]["nameWithOwner"] for n in user["repositories"]["nodes"] if n["parent"]]
+    linkedin = next((a["url"] for a in user["socialAccounts"]["nodes"] if a["provider"] == "LINKEDIN"), None)
+    return user["name"], linkedin, [n["parent"]["nameWithOwner"] for n in user["repositories"]["nodes"] if n["parent"]]
 
 
 def discover(forked):
@@ -193,7 +194,7 @@ def write_page(path, title, description, accent, body, image):
 
 
 def main():
-    name, forked = fetch_profile()
+    name, linkedin, forked = fetch_profile()
     author = SITE.get("author") or name or USER
     others = discover(forked)
     found = {p["slug"]: fetch_commits(p["repo"]) for p in PROJECTS + others}
@@ -231,6 +232,9 @@ def main():
         title = f"{p['name']} Upstream Commits | {author}"
         write_page(f"{p['slug']}/", title, p["description"], p["accent"], body, p.get("image", SITE.get("image")))
 
+    links = f'<a href="https://github.com/{USER}">GitHub</a>'
+    if linkedin:
+        links += f' · <a href="{e(linkedin)}">LinkedIn</a>'
     items = "\n".join(
         ITEM.substitute(
             accent=p["accent"],
@@ -247,7 +251,7 @@ def main():
         f"Upstream Commits | {author}",
         SITE["home_description"],
         SITE["accent"],
-        HOME.substitute(author=e(author), items=items),
+        HOME.substitute(author=e(author), links=links, items=items),
         SITE.get("image"),
     )
 

@@ -7,7 +7,7 @@ import sys
 import urllib.request
 from html.parser import HTMLParser
 
-from build import BASE, EMAIL, PROJECTS, describe
+from build import BASE, EMAIL, PROJECTS, USER, describe
 
 CRAWLER = "LinkedInBot/1.0 (compatible; Mozilla/5.0; Apache-HttpClient +http://www.linkedin.com)"
 REQUIRED = ("og:title", "og:description", "og:url")
@@ -83,6 +83,8 @@ def problems(base, path, commits):
         yield f"button points to {page.commits}"
     if commits is not None and not page.listed:
         yield "no commits listed"
+    if not path and f'href="https://github.com/{USER}"' not in body.decode():
+        yield "no link to the GitHub profile"
     if EMAIL.search(body.decode()):
         yield "e-mail address on the page"
 

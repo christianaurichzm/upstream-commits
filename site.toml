@@ -1,6 +1,6 @@
 # Settings and texts of the site. Any change pushed to main is published in a few minutes.
-# The GitHub user, the site address and the name shown on the pages come from this repository
-# and its owner's profile. Set user, url or author here to override them.
+# The GitHub user, the site address, the name shown on the pages and the LinkedIn link on the home
+# page come from this repository and its owner's profile. Set user, url or author here to override them.
 accent = "#58a6ff"
 home_description = "Commits merged upstream into the Linux kernel, Node.js, V8, PyTorch, CPython and other open source projects, with the full list for each project updated daily."
 notice = "Personal site, not affiliated with these projects. Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. Node.js® is a trademark of the OpenJS Foundation. Other names belong to their respective owners."
