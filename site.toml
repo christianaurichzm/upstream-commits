@@ -22,7 +22,7 @@ repo = "torvalds/linux"
 slug = "linux"
 name = "Linux® Kernel"
 accent = "#f5b82e"
-description = "NULL pointer dereference fixes in the NVMe TCP and RDMA host drivers, and request PDU sizing with header digest."
+description = "NULL pointer dereference and use-after-free fixes in the NVMe TCP and RDMA host drivers, and request PDU sizing with header digest."
 
 [[project]]
 repo = "nodejs/node"
